@@ -1,0 +1,10 @@
+{
+  "itemGroup.circumstable.material": "Circumstable: Materials",
+  "itemGroup.circumstable.machine": "Circumstable: Machines",
+  "itemGroup.circumstable.logistic": "Circumstable: Logistics",
+  "itemGroup.circumstable.tool": "Circumstable: Tools",
+  "block.circumstable.hsla_steel_block": "HSLA Steel Block",
+  "block.circumstable.blast_furnace": "Blast Furnace",
+  "item.circumstable.hsla_steel_ingot": "HSLA Steel Ingot"
+}
+

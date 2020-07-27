@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "up": "minecraft:block/bricks",
+    "down": "circumstable:block/hsla_steel",
+    "north": "circumstable:block/blast_furnace_front_on",
+    "south": "circumstable:block/blast_furnace_side",
+    "west": "circumstable:block/blast_furnace_side",
+    "east": "circumstable:block/blast_furnace_side",
+    "particle": "minecraft:block/bricks"
+  }
+}

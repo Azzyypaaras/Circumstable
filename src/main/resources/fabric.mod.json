@@ -1,37 +1,35 @@
 {
   "schemaVersion": 1,
-  "id": "forgottenfruits",
+  "id": "circumstable",
   "version": "SNAPSHOT-1-1.16",
 
-  "name": "Forgotten Fruits",
-  "description": "Times forgotten, Magic forsaken, and Knowledge to be begotten, tales tell of fruits long forgotten, elusive plants with divine powers lost to time, unobtainable after centuries of calamity... or, are they? Not all that is forgotten is trully lost, after all, whether the legends of ritual and alchemy that may bring back that magic long left behind is up to you to find out.",
+  "name": "Circumstable",
+  "description": "Speen",
   "authors": [
-    "Azazelthedemonlord",
-    "Smilodon",
-    "Ms Ash"
+    "Azazelthedemonlord"
   ],
   "contact": {
-    "homepage": "https://github.com/Dragonoidzero/Forgotten-Fruits",
+    "homepage": "https://github.com/Dragonoidzero/Circumstable",
     "sources": ""
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/forgottenfruits/icon.png",
+  "icon": "assets/circumstable/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "azzy.fabric.forgottenfruits.ForgottenFruits"
+      "azzy.fabric.circumstable.Circumstable"
     ],
     "client": [
-      "azzy.fabric.forgottenfruits.ClientInit"
+      "azzy.fabric.circumstable.ClientInit"
     ],
     "modmenu": [
-      "azzy.fabric.forgottenfruits.config.FFConfig"
+      "azzy.fabric.circumstable.config.CConfig"
     ]
   },
   "mixins": [
-    "forgottenfruits.mixins.json"
+    "circumstable.mixins.json"
   ],
 
   "depends": {
