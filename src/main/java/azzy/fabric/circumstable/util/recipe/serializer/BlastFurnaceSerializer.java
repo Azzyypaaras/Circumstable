@@ -40,8 +40,6 @@ public class BlastFurnaceSerializer implements RecipeSerializer<BlastFurnaceReci
 
         Ingredient input = Ingredient.fromJson(inputs.get("ingredient"));
 
-        CLog.error("owo");
-
        return this.recipeFactory.create(id, input, inputs.get("bonus").getAsInt(), inputs.get("chance").getAsFloat(), extra, output, heat);
     }
 

@@ -43,16 +43,6 @@ public class BlastFurnaceMachineEntity extends MachineEntity{
         if(heat > 1680) {
             meltDown(false, null);
         }
-
-        if(!this.world.isClient()) {
-            Recipe<Inventory> recipe = world.getRecipeManager().getFirstMatch(RecipeRegistry.BLAST_RECIPE, this, world).orElse(null);
-            if(recipe != null){
-                recipe.craft(this);
-            }
-            else{
-                CLog.error("aaa");
-            }
-        }
     }
 
     @Override

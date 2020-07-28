@@ -26,9 +26,15 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import java.math.BigInteger;
+
+import static azzy.fabric.circumstable.Circumstable.CLog;
+
 public class BaseMachine extends HorizontalFacingBlock implements BlockEntityProvider, AttributeProvider {
 
     protected final VoxelShape bounds;
+    private long speed;
+    private long torque;
 
     public BaseMachine(FabricBlockSettings settings, VoxelShape bounds) {
         super(settings);
@@ -83,6 +89,72 @@ public class BaseMachine extends HorizontalFacingBlock implements BlockEntityPro
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+    }
+
+    public long getSpeed() {
+        return speed;
+    }
+
+    public long getTorque() {
+        return torque;
+    }
+
+    public long getPower() {
+        return speed * torque;
+    }
+
+    public void increaseSpeed(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        speed *= factor;
+        torque /= factor;
+    }
+
+    public void decreaseSpeed(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        speed /= factor;
+        torque *= factor;
+    }
+
+    public void increaseTorque(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        torque *= factor;
+        speed /= factor;
+    }
+
+    public void decreaseTorque(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        torque /= factor;
+        speed *= factor;
+    }
+
+    public void increasePower(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        torque /= factor;
+        speed /= factor;
+    }
+
+    public void decreasePower(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        torque *= factor;
+        speed *= factor;
     }
 
     @Override
