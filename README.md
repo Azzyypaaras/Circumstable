@@ -1,4 +1,4 @@
-# Forgotten Fruits
+# Circumstable
 
 ## Health and Safety are overrated
 
@@ -6,7 +6,7 @@ Times forgotten, Magic forsaken, and Knowledge to be begotten, tales tell of fru
 ####
 ...Or, are they? Not all that is forgotten is trully lost, after all. 
 ####
-Whether the legends of ritual and alchemy said to bring back that magic long left behind are true is up to you to find out.
+Whether the legeeee wait a minute why the fuck does Circumstable have Forgotten Fruit's descriptions
 
 ## License
 
