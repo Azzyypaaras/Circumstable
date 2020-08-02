@@ -1,6 +1,6 @@
 package azzy.fabric.circumstable.block.entity;
 
-import azzy.fabric.circumstable.staticentities.blockentity.BlastFurnaceMachineEntity;
+import azzy.fabric.circumstable.staticentities.blockentity.production.BlastFurnaceMachineEntity;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;

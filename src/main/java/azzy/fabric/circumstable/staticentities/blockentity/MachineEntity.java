@@ -36,20 +36,29 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static azzy.fabric.circumstable.Circumstable.CLog;
 
 
-public class MachineEntity extends BlockEntity implements Tickable, InventoryWrapper, SidedInventory, PropertyDelegateHolder, BlockEntityClientSerializable, InventoryProvider, NamedScreenHandlerFactory, HeatHolder {
+public abstract class MachineEntity extends BlockEntity implements Tickable, InventoryWrapper, SidedInventory, PropertyDelegateHolder, BlockEntityClientSerializable, InventoryProvider, NamedScreenHandlerFactory, HeatHolder {
 
     //DEFAULT VALUES, DO NOT FORGET TO OVERRIDE THESE
 
     public DefaultedList<ItemStack> inventory = DefaultedList.ofSize(0, ItemStack.EMPTY);
+    protected final Set<Direction> inputs = new HashSet<>();
     public SimpleFixedFluidInv fluidInv;
     protected boolean isActive = false;
     protected double heat;
+    protected boolean renderInit;
+    protected int renderTickTime;
     private boolean heatInit;
     protected int progress = 0;
     protected HeatTransferHelper.HeatMaterial material;
+    long speed;
+    long torque;
 
     protected final PropertyDelegate entityHolder = new PropertyDelegate() {
         @Override
@@ -67,12 +76,16 @@ public class MachineEntity extends BlockEntity implements Tickable, InventoryWra
         }
     };
 
-    //ALSO OVERRIDE THIS
-
     public MachineEntity(BlockEntityType<? extends MachineEntity> entityType) {
         super(entityType);
         fluidInv = new SimpleFixedFluidInv(0, new FluidAmount(0));
         heatInit = true;
+        renderInit = true;
+    }
+
+    public void calcHeat(){
+        HeatTransferHelper.simulateAmbientHeat(this, this.world.getBiome(pos));
+        simulateSurroundingHeat(pos, this);
     }
 
     @Override
@@ -91,6 +104,23 @@ public class MachineEntity extends BlockEntity implements Tickable, InventoryWra
             heatInit = false;
         }
 
+        for(int i = 0; i < 4; i++)
+            calcHeat();
+
+        if(renderInit){
+            renderTickTime += 5;
+        }
+        else if(renderTickTime > 0) {
+            renderTickTime -= 2;
+        }
+
+        if(renderTickTime >= 120){
+            renderInit = false;
+        }
+        else if(renderTickTime < 0){
+            renderTickTime = 0;
+        }
+
         if (!world.isClient)
             sync();
     }
@@ -104,11 +134,25 @@ public class MachineEntity extends BlockEntity implements Tickable, InventoryWra
         //Fluid nbt
         fluidInv.fromTag(tag.getCompound("fluid"));
 
+        speed = tag.getLong("speed");
+        torque = tag.getLong("torque");
+        heat = tag.getDouble("heat");
+
+        renderTickTime = tag.getInt("rendertime");
+        renderInit = tag.getBoolean("renderinit");
 
         //State nbt
         progress = tag.getInt("progress");
         isActive = tag.getBoolean("active");
         heatInit = tag.getBoolean("init");
+
+        for(Direction direction : Direction.values()){
+            Direction value;
+            value = Direction.byName(tag.getString(direction.asString() + "i"));
+            if(value != null)
+                inputs.add(value);
+        }
+
         super.fromTag(state, tag);
 
     }
@@ -137,10 +181,21 @@ public class MachineEntity extends BlockEntity implements Tickable, InventoryWra
         //Fluid nbt
         tag.put("fluid", fluidInv.toTag());
 
+        tag.putLong("speed", speed);
+        tag.putLong("torque", torque);
+        tag.putDouble("heat", heat);
+
+        tag.putInt("rendertime", renderTickTime);
+        tag.putBoolean("renderinit", renderInit);
+
         //State nbt
         if (isActive) {
             tag.putInt("progress", progress);
             tag.putBoolean("active", isActive);
+        }
+
+        for(Direction direction : inputs){
+            tag.putString(direction.asString() + "i", direction.asString());
         }
 
         tag.putBoolean("init", heatInit);
@@ -158,16 +213,44 @@ public class MachineEntity extends BlockEntity implements Tickable, InventoryWra
         return inventory;
     }
 
+    public int getRenderTickTime() {
+        return renderTickTime;
+    }
+
     @Override
     public void fromClientTag(CompoundTag compoundTag) {
         fluidInv.fromTag(compoundTag.getCompound("fluid"));
         progress = compoundTag.getInt("progress");
+        speed = compoundTag.getLong("speed");
+        torque = compoundTag.getLong("torque");
+        heat = compoundTag.getDouble("heat");
+
+        renderTickTime = compoundTag.getInt("rendertime");
+        renderInit = compoundTag.getBoolean("renderinit");
+
+        for(Direction direction : Direction.values()){
+            Direction value;
+            value = Direction.byName(compoundTag.getString(direction.asString() + "i"));
+            if(value != null)
+                inputs.add(value);
+        }
     }
 
     @Override
     public CompoundTag toClientTag(CompoundTag compoundTag) {
         compoundTag.put("fluid", fluidInv.toTag());
         compoundTag.putInt("progress", progress);
+        compoundTag.putLong("speed", speed);
+        compoundTag.putLong("torque", torque);
+        compoundTag.putDouble("heat", heat);
+
+        compoundTag.putInt("rendertime", renderTickTime);
+        compoundTag.putBoolean("renderinit", renderInit);
+
+        for(Direction direction : inputs){
+            compoundTag.putString(direction.asString() + "i", direction.asString());
+        }
+
         return compoundTag;
     }
 
@@ -213,8 +296,88 @@ public class MachineEntity extends BlockEntity implements Tickable, InventoryWra
         }
     }
 
+    public long getSpeed() {
+        return speed;
+    }
+
+    public long getTorque() {
+        return torque;
+    }
+
+    public long getPower() {
+        return speed * torque;
+    }
+
+    public void increaseSpeed(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        speed *= factor;
+        torque /= factor;
+    }
+
+    public void decreaseSpeed(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        speed /= factor;
+        torque *= factor;
+    }
+
+    public void increaseTorque(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        torque *= factor;
+        speed /= factor;
+    }
+
+    public void decreaseTorque(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        torque /= factor;
+        speed *= factor;
+    }
+
+    public void increasePower(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        torque /= factor;
+        speed /= factor;
+    }
+
+    public void decreasePower(int factor){
+        if(factor % 2 != 0){
+            CLog.error("Very bad speen, so many conflicts with other speens and so many problems, trying to sneak in bad factors but I hereby block your malicious attempt.");
+            return;
+        }
+        torque *= factor;
+        speed *= factor;
+    }
+
+    public void receivePower(long speed, long torque){
+        this.speed = speed;
+        this.torque = torque;
+    }
+
+    public Set<Direction> getInputs() {
+        return inputs;
+    }
+
+    public abstract void updateIO(BlockState state, BlockPos pos, @Nullable ItemStack item);
+
+    public void renderIO() {
+        this.renderInit = true;
+    }
+
     public static <T extends MachineEntity & HeatHolder> void simulateSurroundingHeat(BlockPos pos, T bodyA){
-        List<HeatHolder> sorroundings;
         BlockPos bodyB;
         World world = bodyA.getWorld();
 
@@ -238,4 +401,8 @@ public class MachineEntity extends BlockEntity implements Tickable, InventoryWra
         }
     }
 
+    @Override
+    public double getArea() {
+        return 0.75;
+    }
 }

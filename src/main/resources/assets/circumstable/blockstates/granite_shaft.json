@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "circumstable:block/logistic/shaft_frame_granite"
+    },
+    "facing=east": {
+      "model": "circumstable:block/logistic/shaft_frame_granite",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "circumstable:block/logistic/shaft_frame_granite"
+    },
+    "facing=west": {
+      "model": "circumstable:block/logistic/shaft_frame_granite",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "circumstable:block/logistic/shaft_frame_granite",
+      "x": 90
+    },
+    "facing=down": {
+      "model": "circumstable:block/logistic/shaft_frame_granite",
+      "x": 90
+    }
+  }
+}

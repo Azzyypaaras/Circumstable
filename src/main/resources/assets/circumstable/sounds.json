@@ -1,0 +1,10 @@
+{
+  "machine.generic.whirl": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "circumstable:shaft_whirl"
+      }
+    ]
+  }
+}

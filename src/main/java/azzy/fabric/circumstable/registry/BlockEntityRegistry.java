@@ -1,25 +1,28 @@
 package azzy.fabric.circumstable.registry;
 
-import azzy.fabric.circumstable.block.entity.BlastFurnaceMachine;
-import azzy.fabric.circumstable.staticentities.blockentity.BlastFurnaceMachineEntity;
-import net.minecraft.block.entity.BlastFurnaceBlockEntity;
+import azzy.fabric.circumstable.staticentities.blockentity.logistics.*;
+import azzy.fabric.circumstable.staticentities.blockentity.production.BlastFurnaceMachineEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import java.util.function.Supplier;
 
 import static azzy.fabric.circumstable.Circumstable.MOD_ID;
 import static azzy.fabric.circumstable.registry.BlockRegistry.*;
 
 public class BlockEntityRegistry {
 
-    public static BlockEntityType<BlastFurnaceMachineEntity> BLAST_FURNACE_ENTITY = BlockEntityType.Builder.create(BlastFurnaceMachineEntity::new, BLAST_FURNACE).build(null);
+    public static final BlockEntityType<BlastFurnaceMachineEntity> BLAST_FURNACE_ENTITY = register(BlastFurnaceMachineEntity::new, BLAST_FURNACE, "blast_furnace_entity");
+    public static final BlockEntityType<SteelShaftEntity> STEEL_SHAFT_ENTITY = register(SteelShaftEntity::new, STEEL_SHAFT, "steel_shaft_entity");
+    public static final BlockEntityType<GraniteShaftEntity> GRANITE_SHAFT_ENTITY = register(GraniteShaftEntity::new, GRANITE_SHAFT, "granite_shaft_entity");
+    public static final BlockEntityType<DiamondShaftEntity> DIAMOND_SHAFT_ENTITY = register(DiamondShaftEntity::new, DIAMOND_SHAFT, "diamond_shaft_entity");
+    public static final BlockEntityType<TungstenShaftEntity> TUNGSTEN_SHAFT_ENTITY = register(TungstenShaftEntity::new, TUNGSTEN_SHAFT, "tungsten_shaft_entity");
+    public static final BlockEntityType<TitaniumShaftEntity> TITANIUM_SHAFT_ENTITY = register(TitaniumShaftEntity::new, TITANIUM_SHAFT, "titanium_shaft_entity");
 
-    public static void register(BlockEntityType<? extends BlockEntity> blockEntityType, String name) {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, name), blockEntityType);
-    }
-
-    public static void init() {
-        register(BLAST_FURNACE_ENTITY, "blast_furnace_entity");
+    public static <T extends BlockEntity> BlockEntityType<T> register(Supplier<T> entityFactory, Block block, String name) {
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, name), BlockEntityType.Builder.create(entityFactory,block).build(null));
     }
 }

@@ -2,6 +2,7 @@ package azzy.fabric.circumstable;
 
 import azzy.fabric.circumstable.config.ConfigGen;
 import azzy.fabric.circumstable.registry.*;
+import azzy.fabric.circumstable.registry.damagetypes.SoundRegistry;
 import azzy.fabric.circumstable.util.interaction.HeatTransferHelper;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
@@ -30,14 +31,13 @@ public class Circumstable implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
         AutoConfig.register(ConfigGen.class, JanksonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(ConfigGen.class).getConfig();
 
         //Registries
         ItemRegistry.init();
         PotionRegistry.init();
-        BlockEntityRegistry.init();
+        SoundRegistry.init();
         ContainerRegistry.init();
         FluidRegistry.init();
         HeatTransferHelper.init();

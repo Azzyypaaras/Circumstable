@@ -1,11 +1,17 @@
 package azzy.fabric.circumstable.registry;
 
+import azzy.fabric.circumstable.Circumstable;
 import azzy.fabric.circumstable.block.entity.BlastFurnaceMachine;
+import azzy.fabric.circumstable.block.entity.ShaftMachine;
+import azzy.fabric.circumstable.block.entity.SpeenMachine;
+import azzy.fabric.circumstable.staticentities.blockentity.logistics.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
+import net.minecraft.client.render.model.BakedModelManager;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -24,12 +30,27 @@ public class BlockRegistry {
 
     public static final VoxelShape DEFAULT_SHAPE = VoxelShapes.fullCube();
 
+    private static final Item.Settings MATERIAL = new Item.Settings().group(MACHINE_MATERIALS);
+    private static final Item.Settings LOGISTICS = new Item.Settings().group(Circumstable.LOGISTICS);
+
+
     //Other
+    public static Block BLACKSTONE_PANEL = register("blackstone_panel", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).requiresTool().strength(1.5F, 6.0F).sounds(BlockSoundGroup.GILDED_BLACKSTONE).breakByTool(FabricToolTags.PICKAXES, 1)), MATERIAL);
 
     //misc blocks
-    public static Block STEEL_BLOCK = register("hsla_steel_block", new Block(FabricBlockSettings.of(Material.METAL).requiresTool().strength(6f, 8f).sounds(BlockSoundGroup.METAL).materialColor(MaterialColor.IRON).breakByTool(FabricToolTags.PICKAXES, 2)), new Item.Settings().group(MACHINE_MATERIALS));
+    public static Block STEEL_BLOCK = register("hsla_steel_block", new Block(FabricBlockSettings.of(Material.METAL).requiresTool().strength(6f, 8f).sounds(BlockSoundGroup.METAL).materialColor(MaterialColor.IRON).breakByTool(FabricToolTags.PICKAXES, 2)), MATERIAL);
+    public static Block TITANIUM_BLOCK = register("titanium_block", new Block(FabricBlockSettings.of(Material.METAL).requiresTool().strength(7f, 6f).sounds(BlockSoundGroup.METAL).materialColor(MaterialColor.WHITE).breakByTool(FabricToolTags.PICKAXES, 2)), MATERIAL);
+    public static Block TUNGSTEN_BLOCK = register("tungsten_block", new Block(FabricBlockSettings.of(Material.METAL).requiresTool().strength(20f, 50f).sounds(BlockSoundGroup.METAL).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.PICKAXES, 3)), MATERIAL.fireproof());
 
-    //Block Entities
+
+    //Logistics
+    public static Block GRANITE_SHAFT = register("granite_shaft", new ShaftMachine(FabricBlockSettings.copyOf(Blocks.GRANITE).nonOpaque(), GraniteShaftEntity::new), LOGISTICS);
+    public static Block STEEL_SHAFT = register("hsla_steel_shaft", new ShaftMachine(FabricBlockSettings.of(Material.METAL).requiresTool().strength(6f, 8f).sounds(BlockSoundGroup.METAL).materialColor(MaterialColor.IRON).breakByTool(FabricToolTags.PICKAXES, 2).nonOpaque(), SteelShaftEntity::new), LOGISTICS);
+    public static Block DIAMOND_SHAFT = register("diamond_shaft", new ShaftMachine(FabricBlockSettings.copyOf(Blocks.DIAMOND_BLOCK).nonOpaque(), DiamondShaftEntity::new), LOGISTICS);
+    public static Block TUNGSTEN_SHAFT = register("tungsten_shaft", new ShaftMachine(FabricBlockSettings.copyOf(TUNGSTEN_BLOCK).nonOpaque(), TungstenShaftEntity::new), LOGISTICS);
+    public static Block TITANIUM_SHAFT = register("titanium_shaft", new ShaftMachine(FabricBlockSettings.copyOf(TITANIUM_BLOCK).nonOpaque(), TitaniumShaftEntity::new), LOGISTICS);
+
+    //Machines
     public static Block BLAST_FURNACE = register("blast_furnace", new BlastFurnaceMachine(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).requiresTool().strength(3f, 4f).sounds(BlockSoundGroup.STONE).breakByTool(FabricToolTags.PICKAXES, 2).lightLevel(e -> e.get(BlastFurnaceMachine.LIT) ? 15 : 0), DEFAULT_SHAPE), new Item.Settings().group(MACHINES));
 
     //Fluid

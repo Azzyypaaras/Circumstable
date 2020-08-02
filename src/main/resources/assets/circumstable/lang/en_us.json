@@ -4,7 +4,26 @@
   "itemGroup.circumstable.logistic": "Circumstable: Logistics",
   "itemGroup.circumstable.tool": "Circumstable: Tools",
   "block.circumstable.hsla_steel_block": "HSLA Steel Block",
+  "block.circumstable.titanium_block": "Titanium Block",
+  "block.circumstable.tungsten_block": "Sintered Tungsten Block",
   "block.circumstable.blast_furnace": "Blast Furnace",
-  "item.circumstable.hsla_steel_ingot": "HSLA Steel Ingot"
+  "block.circumstable.blackstone_panel": "Blackstone Panel",
+  "block.circumstable.granite_shaft": "Granite Shaft",
+  "block.circumstable.hsla_steel_shaft": "HSLA Steel Shaft",
+  "block.circumstable.ceramic_shaft": "Ceramic Shaft",
+  "block.circumstable.diamond_shaft": "Diamond Shaft",
+  "block.circumstable.tungsten_shaft": "Tungsten Shaft",
+  "block.circumstable.titanium_shaft": "Titanium Shaft",
+  "block.circumstable.bedrock_shaft": "Bedrock Alloy Shaft",
+  "item.circumstable.hsla_steel_ingot": "HSLA Steel Ingot",
+  "item.circumstable.titanium_ingot": "Titanium Ingot",
+  "item.circumstable.blackstone_panel": "Blackstone Panel",
+  "item.circumstable.granite_shaft": "Granite Shaft",
+  "item.circumstable.hsla_steel_shaft": "HSLA Steel Shaft",
+  "item.circumstable.ceramic_shaft": "Ceramic Shaft",
+  "item.circumstable.diamond_shaft": "Diamond Shaft",
+  "item.circumstable.tungsten_shaft": "Tungsten Shaft",
+  "item.circumstable.titanium_shaft": "Titanium Shaft",
+  "item.circumstable.bedrock_shaft": "Bedrock Alloy Shaft"
 }
 

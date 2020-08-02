@@ -1,15 +1,13 @@
 package azzy.fabric.circumstable.util.controller;
 
-import azzy.fabric.circumstable.staticentities.blockentity.BlastFurnaceMachineEntity;
+import azzy.fabric.circumstable.staticentities.blockentity.production.BlastFurnaceMachineEntity;
 import io.github.cottonmc.cotton.gui.widget.WBar;
 import io.github.cottonmc.cotton.gui.widget.WDynamicLabel;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
-import net.minecraft.entity.ItemSteerable;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Identifier;
 

@@ -1,6 +1,7 @@
-package azzy.fabric.circumstable.staticentities.blockentity;
+package azzy.fabric.circumstable.staticentities.blockentity.production;
 
 import azzy.fabric.circumstable.registry.RecipeRegistry;
+import azzy.fabric.circumstable.staticentities.blockentity.MachineEntity;
 import azzy.fabric.circumstable.util.interaction.HeatTransferHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventory;
@@ -11,18 +12,20 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
 import static azzy.fabric.circumstable.Circumstable.CLog;
 import static azzy.fabric.circumstable.block.entity.BlastFurnaceMachine.LIT;
 import static azzy.fabric.circumstable.registry.BlockEntityRegistry.BLAST_FURNACE_ENTITY;
 
-public class BlastFurnaceMachineEntity extends MachineEntity{
+public class BlastFurnaceMachineEntity extends MachineEntity {
 
     public BlastFurnaceMachineEntity() {
         super(BLAST_FURNACE_ENTITY);
         inventory = DefaultedList.ofSize(10, ItemStack.EMPTY);
-        material = HeatTransferHelper.HeatMaterial.BRICK;
+        material = HeatTransferHelper.HeatMaterial.STEEL;
     }
 
     @Override
@@ -35,14 +38,14 @@ public class BlastFurnaceMachineEntity extends MachineEntity{
         if(!isActive && this.getCachedState().get(LIT))
             world.setBlockState(pos, this.getCachedState().with(LIT, false));
 
-        if(this.world.getTime() % 20 == 0) {
-            HeatTransferHelper.simulateAmbientHeat(this, this.world.getBiome(pos));
-            simulateSurroundingHeat(pos, this);
-        }
-
         if(heat > 1680) {
             meltDown(false, null);
         }
+    }
+
+    @Override
+    public double getArea() {
+        return 1;
     }
 
     @Override
@@ -62,27 +65,7 @@ public class BlastFurnaceMachineEntity extends MachineEntity{
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
-        tag.putDouble("heat", heat);
-        return super.toTag(tag);
-    }
-
-    @Override
-    public void fromTag(BlockState state, CompoundTag tag) {
-        heat = tag.getDouble("heat");
-        super.fromTag(state, tag);
-    }
-
-    @Override
-    public CompoundTag toClientTag(CompoundTag compoundTag) {
-        compoundTag.putDouble("heat", heat);
-        return super.toClientTag(compoundTag);
-    }
-
-    @Override
-    public void fromClientTag(CompoundTag compoundTag) {
-        heat = compoundTag.getDouble("heat");
-        super.fromClientTag(compoundTag);
+    public void updateIO(BlockState state, BlockPos pos, @Nullable ItemStack item) {
     }
 
     PropertyDelegate delegate = new PropertyDelegate() {

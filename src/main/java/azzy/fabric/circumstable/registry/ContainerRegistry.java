@@ -2,7 +2,9 @@ package azzy.fabric.circumstable.registry;
 
 import azzy.fabric.circumstable.block.entity.BlastFurnaceMachine;
 import azzy.fabric.circumstable.util.controller.BlastFurnaceController;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandlerContext;
 
 public class ContainerRegistry {
