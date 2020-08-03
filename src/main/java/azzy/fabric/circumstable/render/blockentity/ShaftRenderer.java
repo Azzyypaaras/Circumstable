@@ -70,10 +70,10 @@ public class ShaftRenderer<T extends FailingTransferEntity> extends BlockEntityR
             matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
         }
 
-        RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (2/16f), (2/16f), 1 + (1/16f), texture, RenderHelper.Scaling.CENTER, true);
+        RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (1.5f/16f), (1.5f/16f), 1 + (1/16f), texture, RenderHelper.Scaling.CENTER, true);
         matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(45));
         matrices.translate(0, -0.002f, 0);
-        RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (2/16f), (2/16f), 1 + (1/16f) + 0.001f, texture, RenderHelper.Scaling.CENTER, true);
+        RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (1.5f/16f), (1.5f/16f), 1 + (1/16f) + 0.001f, texture, RenderHelper.Scaling.CENTER, true);
 
         matrices.pop();
     }

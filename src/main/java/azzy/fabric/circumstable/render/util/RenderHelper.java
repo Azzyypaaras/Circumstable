@@ -1,11 +1,13 @@
 package azzy.fabric.circumstable.render.util;
 
+import azzy.fabric.circumstable.staticentities.blockentity.MachineEntity;
 import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
 
 import static azzy.fabric.circumstable.render.util.FFRenderLayers.OVERLAY;
@@ -68,41 +70,41 @@ public class RenderHelper {
         Matrix4f model = matrices.peek().getModel();
         VertexConsumer consumer = consumers.getBuffer(getCuboidLayer(texture));
 
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(0, 0).light(light).next();
-        consumer.vertex(model, 0, sizeY, 0).color(255, 255, 255, a).texture(0, 1).light(light).next();
-        consumer.vertex(model, sizeX, sizeY, 0).color(255, 255, 255, a).texture(1, 1).light(light).next();
-        consumer.vertex(model, sizeX, 0, 0).color(255, 255, 255, a).texture(1, 0).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(0, 0).light(light).next();
+        consumer.vertex(model, 0, sizeY, 0).color(200, 200, 200, a).texture(0, 1).light(light).next();
+        consumer.vertex(model, sizeX, sizeY, 0).color(200, 200, 200, a).texture(1, 1).light(light).next();
+        consumer.vertex(model, sizeX, 0, 0).color(200, 200, 200, a).texture(1, 0).light(light).next();
 
         matrices.translate(1, 0, 0);
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(0, 0).light(light).next();
-        consumer.vertex(model, 0, sizeY, 0).color(255, 255, 255, a).texture(0, 1).light(light).next();
-        consumer.vertex(model, 0, sizeY, sizeZ).color(255, 255, 255, a).texture(1, 1).light(light).next();
-        consumer.vertex(model, 0, 0, sizeZ).color(255, 255, 255, a).texture(1, 0).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(0, 0).light(light).next();
+        consumer.vertex(model, 0, sizeY, 0).color(200, 200, 200, a).texture(0, 1).light(light).next();
+        consumer.vertex(model, 0, sizeY, sizeZ).color(200, 200, 200, a).texture(1, 1).light(light).next();
+        consumer.vertex(model, 0, 0, sizeZ).color(200, 200, 200, a).texture(1, 0).light(light).next();
 
         matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180));
         matrices.translate(0, 0, -sizeZ);
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(0, 0).light(light).next();
-        consumer.vertex(model, 0, sizeY, 0).color(255, 255, 255, a).texture(0, 1).light(light).next();
-        consumer.vertex(model, sizeX, sizeY, 0).color(255, 255, 255, a).texture(1, 1).light(light).next();
-        consumer.vertex(model, sizeX, 0, 0).color(255, 255, 255, a).texture(1, 0).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(0, 0).light(light).next();
+        consumer.vertex(model, 0, sizeY, 0).color(200, 200, 200, a).texture(0, 1).light(light).next();
+        consumer.vertex(model, sizeX, sizeY, 0).color(200, 200, 200, a).texture(1, 1).light(light).next();
+        consumer.vertex(model, sizeX, 0, 0).color(200, 200, 200, a).texture(1, 0).light(light).next();
 
         matrices.translate(sizeX, 0, 0);
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(0, 0).light(light).next();
-        consumer.vertex(model, 0, sizeY, 0).color(255, 255, 255, a).texture(0, 1).light(light).next();
-        consumer.vertex(model, 0, sizeY, sizeZ).color(255, 255, 255, a).texture(1, 1).light(light).next();
-        consumer.vertex(model, 0, 0, sizeZ).color(255, 255, 255, a).texture(1, 0).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(0, 0).light(light).next();
+        consumer.vertex(model, 0, sizeY, 0).color(200, 200, 200, a).texture(0, 1).light(light).next();
+        consumer.vertex(model, 0, sizeY, sizeZ).color(200, 200, 200, a).texture(1, 1).light(light).next();
+        consumer.vertex(model, 0, 0, sizeZ).color(200, 200, 200, a).texture(1, 0).light(light).next();
 
         matrices.translate(-sizeX, 0, 0);
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(0, 0).light(light).next();
-        consumer.vertex(model, sizeX, 0, 0).color(255, 255, 255, a).texture(0, 1).light(light).next();
-        consumer.vertex(model, sizeX, 0, sizeZ).color(255, 255, 255, a).texture(1, 1).light(light).next();
-        consumer.vertex(model, 0, 0, sizeZ).color(255, 255, 255, a).texture(1, 0).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(0, 0).light(light).next();
+        consumer.vertex(model, sizeX, 0, 0).color(200, 200, 200, a).texture(0, 1).light(light).next();
+        consumer.vertex(model, sizeX, 0, sizeZ).color(200, 200, 200, a).texture(1, 1).light(light).next();
+        consumer.vertex(model, 0, 0, sizeZ).color(200, 200, 200, a).texture(1, 0).light(light).next();
 
         matrices.translate(0, sizeY, 0);
-        consumer.vertex(model, 0, 0, sizeZ).color(255, 255, 255, a).texture(0, 0).light(light).next();
-        consumer.vertex(model, sizeX, 0, sizeZ).color(255, 255, 255, a).texture(0, 1).light(light).next();
-        consumer.vertex(model, sizeX, 0, 0).color(255, 255, 255, a).texture(1, 1).light(light).next();
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(1, 0).light(light).next();
+        consumer.vertex(model, 0, 0, sizeZ).color(200, 200, 200, a).texture(0, 0).light(light).next();
+        consumer.vertex(model, sizeX, 0, sizeZ).color(200, 200, 200, a).texture(0, 1).light(light).next();
+        consumer.vertex(model, sizeX, 0, 0).color(200, 200, 200, a).texture(1, 1).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(1, 0).light(light).next();
     }
 
     public static void renderScaledCuboid(MatrixStack matrices, VertexConsumerProvider consumers, int a, int light, float sizeX, float sizeY, float sizeZ, Identifier texture, Scaling scalingMode, boolean centered){
@@ -142,10 +144,10 @@ public class RenderHelper {
             }
         }
 
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(minU, minV).light(light).next();
-        consumer.vertex(model, 0, sizeY, 0).color(255, 255, 255, a).texture(minU, v).light(light).next();
-        consumer.vertex(model, sizeX, sizeY, 0).color(255, 255, 255, a).texture(u, v).light(light).next();
-        consumer.vertex(model, sizeX, 0, 0).color(255, 255, 255, a).texture(u, minV).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(minU, minV).light(light).next();
+        consumer.vertex(model, 0, sizeY, 0).color(200, 200, 200, a).texture(minU, v).light(light).next();
+        consumer.vertex(model, sizeX, sizeY, 0).color(200, 200, 200, a).texture(u, v).light(light).next();
+        consumer.vertex(model, sizeX, 0, 0).color(200, 200, 200, a).texture(u, minV).light(light).next();
 
         switch (scalingMode){
             case MAX:{
@@ -169,10 +171,10 @@ public class RenderHelper {
         }
 
         matrices.translate(sizeX, 0, 0);
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(minU, minV).light(light).next();
-        consumer.vertex(model, 0, sizeY, 0).color(255, 255, 255, a).texture(minU, v).light(light).next();
-        consumer.vertex(model, 0, sizeY, sizeZ).color(255, 255, 255, a).texture(u, v).light(light).next();
-        consumer.vertex(model, 0, 0, sizeZ).color(255, 255, 255, a).texture(u, minV).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(minU, minV).light(light).next();
+        consumer.vertex(model, 0, sizeY, 0).color(200, 200, 200, a).texture(minU, v).light(light).next();
+        consumer.vertex(model, 0, sizeY, sizeZ).color(200, 200, 200, a).texture(u, v).light(light).next();
+        consumer.vertex(model, 0, 0, sizeZ).color(200, 200, 200, a).texture(u, minV).light(light).next();
 
         switch (scalingMode){
             case MAX:{
@@ -197,10 +199,10 @@ public class RenderHelper {
 
         matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180));
         matrices.translate(0, 0, -sizeZ);
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(minU, minV).light(light).next();
-        consumer.vertex(model, 0, sizeY, 0).color(255, 255, 255, a).texture(minU, v).light(light).next();
-        consumer.vertex(model, sizeX, sizeY, 0).color(255, 255, 255, a).texture(u, v).light(light).next();
-        consumer.vertex(model, sizeX, 0, 0).color(255, 255, 255, a).texture(u, minV).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(minU, minV).light(light).next();
+        consumer.vertex(model, 0, sizeY, 0).color(200, 200, 200, a).texture(minU, v).light(light).next();
+        consumer.vertex(model, sizeX, sizeY, 0).color(200, 200, 200, a).texture(u, v).light(light).next();
+        consumer.vertex(model, sizeX, 0, 0).color(200, 200, 200, a).texture(u, minV).light(light).next();
 
         switch (scalingMode){
             case MAX:{
@@ -224,10 +226,10 @@ public class RenderHelper {
         }
 
         matrices.translate(sizeX, 0, 0);
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(minU, minV).light(light).next();
-        consumer.vertex(model, 0, sizeY, 0).color(255, 255, 255, a).texture(minU, v).light(light).next();
-        consumer.vertex(model, 0, sizeY, sizeZ).color(255, 255, 255, a).texture(u, v).light(light).next();
-        consumer.vertex(model, 0, 0, sizeZ).color(255, 255, 255, a).texture(u, minV).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(minU, minV).light(light).next();
+        consumer.vertex(model, 0, sizeY, 0).color(200, 200, 200, a).texture(minU, v).light(light).next();
+        consumer.vertex(model, 0, sizeY, sizeZ).color(200, 200, 200, a).texture(u, v).light(light).next();
+        consumer.vertex(model, 0, 0, sizeZ).color(200, 200, 200, a).texture(u, minV).light(light).next();
 
         switch (scalingMode){
             case MAX:{
@@ -251,16 +253,16 @@ public class RenderHelper {
         }
 
         matrices.translate(-sizeX, 0, 0);
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(minU, minV).light(light).next();
-        consumer.vertex(model, sizeX, 0, 0).color(255, 255, 255, a).texture(minU, v).light(light).next();
-        consumer.vertex(model, sizeX, 0, sizeZ).color(255, 255, 255, a).texture(u, v).light(light).next();
-        consumer.vertex(model, 0, 0, sizeZ).color(255, 255, 255, a).texture(u, minV).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(minU, minV).light(light).next();
+        consumer.vertex(model, sizeX, 0, 0).color(200, 200, 200, a).texture(minU, v).light(light).next();
+        consumer.vertex(model, sizeX, 0, sizeZ).color(200, 200, 200, a).texture(u, v).light(light).next();
+        consumer.vertex(model, 0, 0, sizeZ).color(200, 200, 200, a).texture(u, minV).light(light).next();
 
         matrices.translate(0, sizeY, 0);
-        consumer.vertex(model, 0, 0, sizeZ).color(255, 255, 255, a).texture(minU, minV).light(light).next();
-        consumer.vertex(model, sizeX, 0, sizeZ).color(255, 255, 255, a).texture(minU, v).light(light).next();
-        consumer.vertex(model, sizeX, 0, 0).color(255, 255, 255, a).texture(u, v).light(light).next();
-        consumer.vertex(model, 0, 0, 0).color(255, 255, 255, a).texture(u, minV).light(light).next();
+        consumer.vertex(model, 0, 0, sizeZ).color(200, 200, 200, a).texture(minU, minV).light(light).next();
+        consumer.vertex(model, sizeX, 0, sizeZ).color(200, 200, 200, a).texture(minU, v).light(light).next();
+        consumer.vertex(model, sizeX, 0, 0).color(200, 200, 200, a).texture(u, v).light(light).next();
+        consumer.vertex(model, 0, 0, 0).color(200, 200, 200, a).texture(u, minV).light(light).next();
 
         matrices.translate(0, -sizeY, 0);
         matrices.translate(sizeX, 0, 0);
@@ -272,6 +274,29 @@ public class RenderHelper {
 
         if(centered)
             matrices.translate(sizeX/2, sizeY/2, sizeZ/2);
+    }
+
+    public static <T extends MachineEntity> void applyPermutations(MatrixStack matrices, Direction facing, T entity, float tickDelta){
+        switch(facing){
+            case EAST:{
+                matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90));
+                matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
+                break;
+            }
+            case SOUTH:{
+                matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180));
+                matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
+                break;
+            }
+            case WEST:{
+                matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(270));
+                matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
+                break;
+            }
+            default:{
+                matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
+            }
+        }
     }
 
     public enum Scaling{

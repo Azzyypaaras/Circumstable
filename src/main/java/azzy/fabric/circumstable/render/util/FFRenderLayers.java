@@ -26,6 +26,6 @@ public abstract class FFRenderLayers extends RenderLayer {
     }
 
     public static RenderLayer getCuboidLayer(Identifier texture){
-        return RenderLayer.of("circumstable:cuboid", VertexFormats.POSITION_COLOR_TEXTURE_LIGHT, GL11.GL_QUADS, 1024, false, true, RenderLayer.MultiPhaseParameters.builder().texture(new RenderPhase.Texture(texture, false, true)).diffuseLighting(DISABLE_DIFFUSE_LIGHTING).lightmap(ENABLE_LIGHTMAP).shadeModel(SMOOTH_SHADE_MODEL).transparency(TRANSLUCENT_TRANSPARENCY).build(true));
+        return RenderLayer.of("circumstable:cuboid", VertexFormats.POSITION_COLOR_TEXTURE_LIGHT, GL11.GL_QUADS, 256, false, true, RenderLayer.MultiPhaseParameters.builder().texture(new RenderPhase.Texture(texture, false, false)).lightmap(ENABLE_LIGHTMAP).diffuseLighting(ENABLE_DIFFUSE_LIGHTING).transparency(TRANSLUCENT_TRANSPARENCY).build(true));
     }
 }
