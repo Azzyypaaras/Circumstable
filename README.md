@@ -1,12 +1,8 @@
 # Circumstable
 
-## Health and Safety are overrated
+## Ok so basically
 
-Times forgotten, Magic forsaken, and Knowledge to be begotten, tales tell of fruits long forgotten, elusive plants with divine powers lost to time, unobtainable after centuries of calamity... 
-####
-...Or, are they? Not all that is forgotten is trully lost, after all. 
-####
-Whether the legeeee wait a minute why the fuck does Circumstable have Forgotten Fruit's descriptions
+Rotarycraft 2
 
 ## License
 
