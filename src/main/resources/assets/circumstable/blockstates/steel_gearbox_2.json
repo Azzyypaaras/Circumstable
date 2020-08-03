@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "facing=east,inverted=true": {
+      "model": "circumstable:block/gearbox_frame",
+      "x": 180,
+      "y": 270
+    },
+    "facing=east,inverted=false": {
+      "model": "circumstable:block/gearbox_frame",
+      "y": 90
+    },
+    "facing=north,inverted=true": {
+      "model": "circumstable:block/gearbox_frame",
+      "x": 180,
+      "y": 180
+    },
+    "facing=north,inverted=false": {
+      "model": "circumstable:block/gearbox_frame"
+    },
+    "facing=south,inverted=true": {
+      "model": "circumstable:block/gearbox_frame",
+      "x": 180
+    },
+    "facing=south,inverted=false": {
+      "model": "circumstable:block/gearbox_frame",
+      "y": 180
+    },
+    "facing=west,inverted=true": {
+      "model": "circumstable:block/gearbox_frame",
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,inverted=false": {
+      "model": "circumstable:block/gearbox_frame",
+      "y": 270
+    }
+  }
+}

@@ -405,4 +405,6 @@ public abstract class MachineEntity extends BlockEntity implements Tickable, Inv
     public double getArea() {
         return 0.75;
     }
+
+
 }

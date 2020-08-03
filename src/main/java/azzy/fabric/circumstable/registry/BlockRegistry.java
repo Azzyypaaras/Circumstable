@@ -2,9 +2,11 @@ package azzy.fabric.circumstable.registry;
 
 import azzy.fabric.circumstable.Circumstable;
 import azzy.fabric.circumstable.block.entity.BlastFurnaceMachine;
+import azzy.fabric.circumstable.block.entity.GearboxMachine;
 import azzy.fabric.circumstable.block.entity.ShaftMachine;
 import azzy.fabric.circumstable.block.entity.SpeenMachine;
 import azzy.fabric.circumstable.staticentities.blockentity.logistics.*;
+import azzy.fabric.circumstable.staticentities.blockentity.logistics.gearboxes.SteelGearboxEntity2;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -49,6 +51,8 @@ public class BlockRegistry {
     public static Block DIAMOND_SHAFT = register("diamond_shaft", new ShaftMachine(FabricBlockSettings.copyOf(Blocks.DIAMOND_BLOCK).nonOpaque(), DiamondShaftEntity::new), LOGISTICS);
     public static Block TUNGSTEN_SHAFT = register("tungsten_shaft", new ShaftMachine(FabricBlockSettings.copyOf(TUNGSTEN_BLOCK).nonOpaque(), TungstenShaftEntity::new), LOGISTICS);
     public static Block TITANIUM_SHAFT = register("titanium_shaft", new ShaftMachine(FabricBlockSettings.copyOf(TITANIUM_BLOCK).nonOpaque(), TitaniumShaftEntity::new), LOGISTICS);
+
+    public static Block STEEL_GEARBOX_2 = register("steel_gearbox_2", new GearboxMachine(FabricBlockSettings.copyOf(STEEL_SHAFT), SteelGearboxEntity2::new), LOGISTICS);
 
     //Machines
     public static Block BLAST_FURNACE = register("blast_furnace", new BlastFurnaceMachine(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).requiresTool().strength(3f, 4f).sounds(BlockSoundGroup.STONE).breakByTool(FabricToolTags.PICKAXES, 2).lightLevel(e -> e.get(BlastFurnaceMachine.LIT) ? 15 : 0), DEFAULT_SHAPE), new Item.Settings().group(MACHINES));

@@ -1,9 +1,9 @@
 package azzy.fabric.circumstable.registry;
 
-import azzy.fabric.circumstable.render.blockentity.*;
+import azzy.fabric.circumstable.render.blockentity.gearbox.GearboxRenderer2x;
+import azzy.fabric.circumstable.render.blockentity.gearbox.SteelGearbox2xRenderer;
+import azzy.fabric.circumstable.render.blockentity.shaft.*;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.util.registry.Registry;
 
 import static azzy.fabric.circumstable.registry.BlockEntityRegistry.*;
 
@@ -17,5 +17,6 @@ public class RenderRegistry {
         INSTANCE.register(DIAMOND_SHAFT_ENTITY, DiamondShaftRenderer::new);
         INSTANCE.register(TUNGSTEN_SHAFT_ENTITY, TungstenShaftRenderer::new);
         INSTANCE.register(TITANIUM_SHAFT_ENTITY, TitaniumShaftRenderer::new);
+        INSTANCE.register(STEEL_GEARBOX_ENTITY_2, SteelGearbox2xRenderer::new);
     }
 }

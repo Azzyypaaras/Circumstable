@@ -30,16 +30,17 @@ import java.util.Collection;
 import java.util.List;
 
 import static azzy.fabric.circumstable.Circumstable.CLog;
+import static azzy.fabric.circumstable.Circumstable.MOD_ID;
 import static azzy.fabric.circumstable.registry.ItemRegistry.STICK_STEEL;
 import static azzy.fabric.circumstable.render.util.FFRenderLayers.OVERLAY;
 
 public class ShaftRenderer<T extends FailingTransferEntity> extends BlockEntityRenderer<T> implements IORenderer<T>{
 
-    private final ItemStack shaft;
+    private final Identifier texture;
 
-    public ShaftRenderer(BlockEntityRenderDispatcher dispatcher, Item shaft) {
+    public ShaftRenderer(BlockEntityRenderDispatcher dispatcher, Identifier texture) {
         super(dispatcher);
-        this.shaft = new ItemStack(shaft);
+        this.texture = texture;
     }
 
     @Override
@@ -69,7 +70,11 @@ public class ShaftRenderer<T extends FailingTransferEntity> extends BlockEntityR
             matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
         }
 
-        MinecraftClient.getInstance().getItemRenderer().renderItem(shaft, ModelTransformation.Mode.NONE, light, overlay, matrices, vertexConsumers);
+        RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (2/16f), (2/16f), 1 + (1/16f), texture, RenderHelper.Scaling.CENTER, true);
+        matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(45));
+        matrices.translate(0, -0.002f, 0);
+        RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (2/16f), (2/16f), 1 + (1/16f) + 0.001f, texture, RenderHelper.Scaling.CENTER, true);
+
         matrices.pop();
     }
 

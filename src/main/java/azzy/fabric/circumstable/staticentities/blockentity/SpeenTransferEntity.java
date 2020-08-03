@@ -29,9 +29,13 @@ public abstract class SpeenTransferEntity extends MachineEntity {
     protected final Set<Direction> outputs = new HashSet<>();
     protected long maxSpeed, maxTorque;
     protected int maxTemp = 0;
+    protected TransferMode mode;
+    protected int modifier;
 
     public SpeenTransferEntity(BlockEntityType<? extends MachineEntity> entityType) {
         super(entityType);
+        mode = TransferMode.SPEED;
+        modifier = 1;
     }
 
     @Override
@@ -47,6 +51,14 @@ public abstract class SpeenTransferEntity extends MachineEntity {
         if(outputs.size() != 0) {
             outSpeed = speed / outputs.size();
             outTorque = torque / outputs.size();
+            if(mode == TransferMode.SPEED){
+                outSpeed *= 2;
+                outTorque /= 2;
+            }
+            else{
+                outTorque *= 2;
+                outSpeed /= 2;
+            }
             for(Direction direction : outputs){
                 BlockEntity entity = world.getBlockEntity(pos.offset(direction));
                 if(entity instanceof MachineEntity && ((MachineEntity) entity).getInputs().contains(direction.getOpposite()))
@@ -114,6 +126,7 @@ public abstract class SpeenTransferEntity extends MachineEntity {
         for(Direction direction : outputs){
             tag.putString(direction.asString() + "o", direction.asString());
         }
+        tag.putString("mode", mode.toString());
         return super.toTag(tag);
     }
 
@@ -126,6 +139,7 @@ public abstract class SpeenTransferEntity extends MachineEntity {
             if(value != null)
                 outputs.add(value);
         }
+        mode = TransferMode.valueOf(tag.getString("mode"));
     }
 
     @Override
@@ -133,6 +147,7 @@ public abstract class SpeenTransferEntity extends MachineEntity {
         for(Direction direction : outputs){
             compoundTag.putString(direction.asString() + "o", direction.asString());
         }
+        compoundTag.putString("mode", mode.toString());
         return super.toClientTag(compoundTag);
     }
 
@@ -145,5 +160,11 @@ public abstract class SpeenTransferEntity extends MachineEntity {
             if(value != null)
                 outputs.add(value);
         }
+        mode = TransferMode.valueOf(compoundTag.getString("mode"));
+    }
+
+    public enum TransferMode{
+        SPEED,
+        TORQUE
     }
 }
