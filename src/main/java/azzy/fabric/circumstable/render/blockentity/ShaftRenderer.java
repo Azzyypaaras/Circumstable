@@ -58,18 +58,7 @@ public class ShaftRenderer<T extends FailingTransferEntity> extends BlockEntityR
         matrices.push();
         matrices.translate(0.5, 0.5, 0.5);
 
-        if(facing == Direction.NORTH || facing == Direction.SOUTH){
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
-        else if(facing == Direction.EAST || facing == Direction.WEST){
-            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90));
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
-        else{
-            matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(90));
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
-
+        RenderHelper.applyPermutations(matrices, facing, entity, tickDelta, false, false);
         RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (1.5f/16f), (1.5f/16f), 1 + (1/16f), texture, RenderHelper.Scaling.CENTER, true);
         matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(45));
         matrices.translate(0, -0.002f, 0);

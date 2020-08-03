@@ -276,27 +276,26 @@ public class RenderHelper {
             matrices.translate(sizeX/2, sizeY/2, sizeZ/2);
     }
 
-    public static <T extends MachineEntity> void applyPermutations(MatrixStack matrices, Direction facing, T entity, float tickDelta){
-        switch(facing){
-            case EAST:{
-                matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90));
-                matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-                break;
-            }
-            case SOUTH:{
-                matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180));
-                matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-                break;
-            }
-            case WEST:{
-                matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(270));
-                matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-                break;
-            }
-            default:{
-                matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-            }
+    public static <T extends MachineEntity> void applyPermutations(MatrixStack matrices, Direction facing, T entity, float tickDelta, boolean inverted, boolean backSpin){
+
+        int inverter = backSpin ? -1 : 1;
+
+        if(facing == Direction.EAST){
+            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(270));
         }
+        else if(facing == Direction.SOUTH){
+            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180));
+        }
+        else if(facing == Direction.WEST){
+            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90));
+        }
+        else if(facing == Direction.NORTH){
+        }
+        else {
+            matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(270));
+        }
+
+        matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100) * inverter));
     }
 
     public enum Scaling{

@@ -37,18 +37,7 @@ public class GearboxRenderer2x<T extends GearboxEntity> extends GearboxRenderer<
 
         matrices.translate(0.5, 0.5, 0.5);
 
-        if(facing == Direction.NORTH || facing == Direction.SOUTH){
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
-        else if(facing == Direction.EAST || facing == Direction.WEST){
-            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90));
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
-        else{
-            matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(90));
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion((((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
-
+        RenderHelper.applyPermutations(matrices, facing, entity, tickDelta, false, false);
         matrices.translate(0, 0, -6/16f);
 
         RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (1.5f/16f), (1.5f/16f),  (5/16f), texture, RenderHelper.Scaling.CENTER, true);
@@ -75,19 +64,8 @@ public class GearboxRenderer2x<T extends GearboxEntity> extends GearboxRenderer<
         matrices.push();
 
         matrices.translate(0.5, 0.3, 0.3);
-        matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(-45/2f));
 
-        if(facing == Direction.NORTH || facing == Direction.SOUTH){
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion(-(((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
-        else if(facing == Direction.EAST || facing == Direction.WEST){
-            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90));
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion(-(((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
-        else{
-            matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(90));
-            matrices.multiply(Vector3f.POSITIVE_Z.getRadialQuaternion(-(((entity.getWorld().getTime() + tickDelta) * entity.getSpeed())/1100)));
-        }
+        RenderHelper.applyPermutations(matrices, facing, entity, tickDelta, true, true);
         RenderHelper.renderScaledCuboid(matrices, vertexConsumers, 255, light, (1.5f/16f), (1.5f/16f), (14/16f), texture, RenderHelper.Scaling.CENTER, true);
         matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(45));
         matrices.translate(0, -0.002f, 0);

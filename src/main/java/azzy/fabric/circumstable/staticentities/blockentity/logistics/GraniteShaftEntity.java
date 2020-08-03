@@ -8,7 +8,7 @@ import static azzy.fabric.circumstable.registry.BlockEntityRegistry.*;
 public class GraniteShaftEntity extends ShaftEntity{
     public GraniteShaftEntity() {
         super(GRANITE_SHAFT_ENTITY);
-        maxSpeed = 57005;
+        maxSpeed = 3489;
         maxTorque = 5560;
         maxTemp = 1215;
         material = HeatTransferHelper.HeatMaterial.GRANITE;

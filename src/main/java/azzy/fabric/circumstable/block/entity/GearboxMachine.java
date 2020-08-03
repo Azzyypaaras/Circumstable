@@ -65,7 +65,7 @@ public class GearboxMachine extends SpeenMachine {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         Direction direction = ctx.getSide();
         BlockPos blockPos = ctx.getBlockPos();
-        BlockState state = this.getDefaultState().with(FACING, ctx.getPlayerFacing());
+        BlockState state = this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
 
         return direction != Direction.DOWN && (direction == Direction.UP || ctx.getHitPos().y - (double)blockPos.getY() <= 0.5D) ? state.with(TYPE, false) : state.with(TYPE, true);
     }

@@ -1,5 +1,6 @@
 package azzy.fabric.circumstable.registry;
 
+import azzy.fabric.circumstable.item.AngularItem;
 import azzy.fabric.circumstable.item.IOItem;
 import azzy.fabric.circumstable.item.ThermometerItem;
 import net.minecraft.fluid.FlowableFluid;
@@ -29,6 +30,7 @@ public class ItemRegistry extends Item {
     //Tools
     public static Item THERMOMETER = register("thermometer", new ThermometerItem(TOOL));
     public static Item IOSCANNER = register("ioscanner", new IOItem(TOOL));
+    public static Item TRANSDUCER = register("transducer", new AngularItem(TOOL));
 
     //Technical
     public static Item STICK_GRANITE = register("shaft_core_granite", new Item(SPECIAL));

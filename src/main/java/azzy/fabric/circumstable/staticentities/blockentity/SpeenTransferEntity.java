@@ -151,6 +151,14 @@ public abstract class SpeenTransferEntity extends MachineEntity {
         return super.toClientTag(compoundTag);
     }
 
+    public long getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public long getMaxTorque() {
+        return maxTorque;
+    }
+
     @Override
     public void fromClientTag(CompoundTag compoundTag) {
         super.fromClientTag(compoundTag);
